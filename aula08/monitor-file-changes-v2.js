@@ -1,26 +1,14 @@
 'use strict'
 
-let fs = require('fs')
+
+let mf = require('./monitoring-files')
 
 if (process.argv.length < 3) {
   console.log("Missing arguments for file names to monitor")
   return;
 }
-process.argv.slice(2).forEach(watchFile)
 
-
-function watchFile(file) {
-  fs.access(file, fs.constants.F_OK, registerAsWatcher);
-
-  function registerAsWatcher(err) {
-    if(err) {
-      return console.log(`File ${file} does not exist.`)
-    }
-    fs.watch(file, processFileChangeEvent)
-    console.log(`Watching file ${file}`)
-    fs.watchFile(file, processFileChangeStats)
-  }
-}
+mf.watchFiles(process.argv.slice(2), processFileChangeEvent)
 
 console.log('Preparation phase Done!')
 
