@@ -3,8 +3,9 @@ let fs = require('fs')
 
 
 module.exports.watchFiles = function (files, cb) {
+  //files = files.constructor === Array ? files : [files]
+  files = Array.isArray(files) ? files : [files]
   files.forEach(watchFile)
-
 
   function watchFile(file) {
     fs.access(file, fs.constants.F_OK, registerAsWatcher);
