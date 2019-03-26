@@ -1,5 +1,6 @@
 const net = require('net')
 const mf = require('./monitoring-files')
+const LDJ = require('./ldj')
 
 const PORT = 1904
 
@@ -63,11 +64,13 @@ function handleClientSocketErrors(clientSocket) {
 }
 
 function fileChanged(err, data) {
+  let ldjMessage = new LDJ(data).toJson()
   clients.forEach(notifyClient)
 
   function notifyClient(clientSocket) {
-    clientSocket.write(`Notifying client with ${data}\n`)
+    clientSocket.write(ldjMessage.slice(0, ldjMessage.length/2))
+
+    clientSocket.write(ldjMessage.slice(ldjMessage.length/2))
   }
 }
-
 
