@@ -1,0 +1,22 @@
+{
+  "name": "aula18",
+  "version": "1.0.0",
+  "description": "Para mais informações sobre esta turma consultar o [wiki](https://github.com/isel-leic-pi/PI-1819v-LI51N/wiki) deste repositório.",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isel-leic-pi/PI-1819v-LI51N.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/isel-leic-pi/PI-1819v-LI51N/issues"
+  },
+  "homepage": "https://github.com/isel-leic-pi/PI-1819v-LI51N#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
