@@ -3,6 +3,7 @@
 module.exports = (router, routerGlobal) => {
   router.get('/', listBooks)
   router.get('/:id', bookDetails)
+  router.post('/', addBook)
 
   function listBooks(req, rsp) {
     rsp.send("list books")
@@ -11,6 +12,12 @@ module.exports = (router, routerGlobal) => {
   function bookDetails(req, rsp) {
     rsp.send(`Details for book with id=${req.params.id}`)
     console.log('query: %o', req.query)
+  }
+
+
+  function addBook(req, rsp) {
+    rsp.status(201).send(`Book added`)
+    console.log('request body: %o', req.body)
   }
 
 
