@@ -1,0 +1,8 @@
+[
+  {
+    "title": "título",
+    "description": "description",
+    "isbn": "4343543543",
+    "authors": ["author1", "author3"]
+  }
+]
