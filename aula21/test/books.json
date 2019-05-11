@@ -1,6 +1,21 @@
 [
   {
-    "title": "título",
+    "id": 1,
+    "title": "título1",
+    "description": "description",
+    "isbn": "4343543543",
+    "authors": ["author1", "author3"]
+  },
+  {
+    "id": 2,
+    "title": "título2",
+    "description": "description",
+    "isbn": "4343543543",
+    "authors": ["author1", "author3"]
+  },
+  {
+    "id": 3,
+    "title": "título3",
     "description": "description",
     "isbn": "4343543543",
     "authors": ["author1", "author3"]
