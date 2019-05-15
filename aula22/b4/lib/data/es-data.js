@@ -12,7 +12,7 @@ module.exports = function (es) {
 
 
 
-  function search(field, query, cb) {
+  function search(field, query) {
     const esReqBody = {
       size: 10,
       query: {
@@ -21,11 +21,10 @@ module.exports = function (es) {
         }
       }
     };
-    makeRequest(new Options(url, esReqBody), processSearch)
+    return makeRequest(new Options(url, esReqBody)).then(processSearch)
 
-    function processSearch(err, body) {
-      if (err) return cb(err)
-      cb(err, body.hits.hits.map(({_source}) => _source));
+    function processSearch(body) {
+      return body.hits.hits.map(({_source}) => _source);
     }
   }
 
@@ -43,13 +42,7 @@ module.exports = function (es) {
       }
     };
 
-    makeRequest(new Options(url, esReqBody), processSuggest)
-
-    function processSuggest(err, body) {
-      if (err)
-        return cb(err)
-      cb(err, body);
-    }
+    return makeRequest(new Options(url, esReqBody))
   }
 
 
@@ -60,16 +53,18 @@ module.exports = function (es) {
     this.method = method
   }
 
-  function makeRequest(options, cb) {
-    console.log("Request to %o", options)
-    request(options, (err, esRes, esResBody) => {
-      if (err) {
-        return cb({
-          error: 'bad_gateway',
-          reason: err.code,
-        });
-      }
-      cb(err, esResBody)
+  function makeRequest(options) {
+    return new Promise((resolve, reject) => {
+      console.log("Request to %o", options)
+      request(options, (err, esRes, esResBody) => {
+        if (err) {
+          return reject({
+            error: 'bad_gateway',
+            reason: err.code,
+          });
+        }
+        resolve(esResBody)
+      });
     });
   }
 }

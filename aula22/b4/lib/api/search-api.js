@@ -20,17 +20,17 @@ module.exports = (router, searchService) => {
 
 
   function search(req, rsp) {
-    searchService.search(req.params.field, req.params.query, processSearchResponse)
+    searchService.search(req.params.field, req.params.query).then(processSearchResponse)
 
-    function processSearchResponse(err, data) {
+    function processSearchResponse(data) {
       rsp.status(200).json(data)
     }
   }
 
   function suggest(req, rsp) {
-    searchService.suggest(req.params.field, req.params.query, processSuggestResponse)
+    searchService.suggest(req.params.field, req.params.query).then(processSuggestResponse)
 
-    function processSuggestResponse(err, data) {
+    function processSuggestResponse(data) {
       rsp.status(200).json(data)
     }
   }

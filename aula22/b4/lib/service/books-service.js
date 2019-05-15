@@ -6,11 +6,11 @@ module.exports = function(esData) {
   }
 
 
-  function search(field, query, cb) {
-    esData.search(field, query, cb)
+  function search(field, query) {
+    return esData.search(field, query)
   }
 
-  function suggest(field, query, cb) {
-    esData.suggest(field, query, cb)
+  function suggest(field, query) {
+    return esData.suggest(field, query)
   }
 }
