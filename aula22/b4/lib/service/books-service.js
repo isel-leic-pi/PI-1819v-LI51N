@@ -6,7 +6,7 @@ module.exports = function(esData) {
   }
 
 
-  function search(field, query) {
+  async function search(field, query) {
     return esData.search(field, query)
   }
 

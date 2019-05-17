@@ -19,11 +19,12 @@ module.exports = (router, searchService) => {
 
 
 
-  function search(req, rsp) {
-    searchService.search(req.params.field, req.params.query).then(processSearchResponse)
-
-    function processSearchResponse(data) {
-      rsp.status(200).json(data)
+  async function search(req, rsp) {
+    try {
+      const data = await searchService.search(req.params.field, req.params.query)
+      rsp.status(200).json(data)  
+    } catch(e) {
+      
     }
   }
 
