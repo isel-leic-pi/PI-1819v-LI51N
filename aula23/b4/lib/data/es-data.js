@@ -1,5 +1,5 @@
 'use strict';
-const request = require('request');
+const request = require('request-promise');
 
 
 module.exports = function (es) {
@@ -54,18 +54,14 @@ module.exports = function (es) {
   }
 
   function makeRequest(options) {
-    return new Promise((resolve, reject) => {
-      console.log("Request to %o", options)
-      request(options, (err, esRes, esResBody) => {
-        if (err) {
-          return reject({
-            error: 'bad_gateway',
-            reason: err.code,
-          });
+    console.log("Request to %o", options)
+    return request(options)
+      .catch(err => {
+        return {
+          error: 'bad_gateway',
+          reason: err.code,
         }
-        resolve(esResBody)
       });
-    });
   }
 }
 
