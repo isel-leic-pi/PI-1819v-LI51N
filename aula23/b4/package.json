@@ -15,8 +15,7 @@
     "express": "^4.16.4",
     "morgan": "^1.9.1",
     "nconf": "^0.10.0",
-    "request": "^2.88.0",
-    "request-promise": "^4.2.4"
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",

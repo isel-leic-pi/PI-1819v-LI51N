@@ -1,5 +1,5 @@
 'use strict';
-const request = require('request-promise');
+const fetch = require('node-fetch');
 
 
 module.exports = function (es) {
@@ -21,7 +21,8 @@ module.exports = function (es) {
         }
       }
     };
-    return makeRequest(new Options(url, esReqBody)).then(processSearch)
+    return makeRequest(url, new Options(esReqBody, "POST"))
+      .then(processSearch)
 
     function processSearch(body) {
       return body.hits.hits.map(({_source}) => _source);
@@ -42,20 +43,22 @@ module.exports = function (es) {
       }
     };
 
-    return makeRequest(new Options(url, esReqBody))
+    return makeRequest(url, new Options(esReqBody, "POST"))
   }
 
 
-  function Options(url, body, json = true, method = 'GET') {
-    this.url = url
-    this.body = body
-    this.json = json
+  function Options(body, method = 'GET', contentType = 'application/json') {
+    this.body = JSON.stringify(body)
+    this.headers = {
+      'Content-Type': contentType
+    }
     this.method = method
   }
 
-  function makeRequest(options) {
-    console.log("Request to %o", options)
-    return request(options)
+  function makeRequest(url, options) {
+    console.log("Request to '%s' with options %o", url, options)
+    return fetch(url, options)
+      .then(res => res.json())
       .catch(err => {
         return {
           error: 'bad_gateway',
