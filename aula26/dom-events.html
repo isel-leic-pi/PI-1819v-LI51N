@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Hello World</title>
+    <style>
+      body {
+        border: 2px solid black
+
+      }
+      #result {
+        
+      }
+    </style>
+
+    <script>
+      window.onload = function() {
+        
+        
+
+        const searchBtn = document.querySelector("#searchBtn");
+        const clearBtn = document.querySelector("#clearBtn");
+        const footer = document.querySelector("#footer");
+        searchBtn.onclick = search;
+        clearBtn.onclick = clear;
+        footer.onclick = toggleDisplay;
+
+        document.body.addEventListener("click", handleClickOnCapturing, true)
+        document.body.addEventListener("click", handleClickOnBubbling, false)
+
+        // document.body.addEventListener("contextmenu", function(e) {
+        //   e.preventDefault();
+        // }, true)
+
+        document.body.oncontextmenu =  function(e) {
+           e.preventDefault();
+        }
+        document.body.onclick = changeBackground;
+
+
+        const input = document.querySelector("#searchText");
+        const res = document.querySelector("#result");
+        
+        function search() {
+          res.innerHTML = input.value;
+        }
+
+        function clear() {
+          res.innerHTML = ""
+        }
+
+        function toggleDisplay(e) {
+          console.log("target")
+          //e.preventDefault();
+          //res.style.display = res.style.display == "block" ? "none" : "block"; 
+          res.style.visibility = res.style.visibility == "hidden" ? "visible" : "hidden"; 
+        }
+
+
+
+        function changeBackground() {
+          console.log("####")
+            var colors = ["red", "white", "yellow", "gray"]
+
+            document.body.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)]
+
+        }
+
+        function handleClickOnCapturing(e) {
+          console.log("capturing")
+          //e.stopPropagation()
+          
+        }
+        
+        function handleClickOnBubbling(e) {
+          console.log("bubbling")
+        }
+
+      }
+      </script>
+  </head>
+  <body>
+    Search Book: <input type="text" id="searchText" /> 
+    <button id="searchBtn">Search</button>
+    <button id="clearBtn">Clear</button>
+    
+    
+    <div id="result">
+    </div>
+
+    <p id="footer">Texto depois da zona de resultados</p>
+    
+  </body>
+  <html>

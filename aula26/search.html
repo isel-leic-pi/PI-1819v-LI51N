@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Search Books</title>
+
+    <script>
+
+      const SEARCH_URI = "http://localhost:60702/api/search/books/author/"
+      window.onload = function() {
+        
+
+        const searchBtn = document.querySelector("#searchBtn");
+        const clearBtn = document.querySelector("#clearBtn");
+        searchBtn.onclick = search;
+        clearBtn.onclick = clear;
+
+
+        const input = document.querySelector("#searchText");
+        const res = document.querySelector("#result");
+        
+        function search() {
+          
+          const textToSearch = input.value;
+          let searchUri = SEARCH_URI + textToSearch
+          console.log(searchUri)
+          fetch(searchUri)
+            .then(rsp => rsp.json())
+            .then(showResults)
+            .catch(console.log)
+
+
+            function showResults(responseBody) {
+              console.log(2)
+                res.innerHTML = responseBody;
+            }
+        }
+
+        function clear() {
+          res.innerHTML = ""
+        }
+
+      }
+      </script>
+  </head>
+  <body>
+    Search Book: <input type="text" id="searchText" /> 
+    <button id="searchBtn">Search</button>
+    <button id="clearBtn">Clear</button>
+    
+    
+    <div id="result">
+    </div>
+
+    <p id="footer">Texto depois da zona de resultados</p>
+    
+  </body>
+  <html>
