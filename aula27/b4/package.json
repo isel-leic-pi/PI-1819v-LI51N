@@ -1,0 +1,24 @@
+{
+  "name": "b4",
+  "version": "1.0.0",
+  "description": "Better Book Bundle Builder",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon b4-server",
+    "test": "node_modules/mocha/bin/mocha",
+    "test:watch": "node_modules/mocha/bin/mocha --watch --reporter min"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.4",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "nconf": "^0.10.0",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4"
+  }
+}
