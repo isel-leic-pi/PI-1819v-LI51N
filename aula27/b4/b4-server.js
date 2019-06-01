@@ -3,6 +3,7 @@
 const express = require('express') 
 const morgan = require('morgan') 
 const nconf = require('nconf')
+const path = require('path');
 const pkg = require('./package.json')
 
 nconf.argv().env('__')
@@ -16,7 +17,7 @@ const searchApi = require('./lib/api/search-api')(express.Router(), booksService
 
 const app = express()
 
-
+app.use(express.static(path.join(__dirname, "app")))
 app.use(morgan('dev'))
 app.get('/api/version', (req, res) => res.status(200).send(pkg.version)) 
 app.use('/api/', searchApi)
