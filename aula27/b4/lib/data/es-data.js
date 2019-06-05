@@ -43,7 +43,7 @@ module.exports = function (es) {
       }
     };
 
-    return makeRequest(url, new Options(esReqBody, "POST"))
+    return makeRequest(url, new Options(esReqBody, "POST")).then(rspBody => rspBody.suggest.suggestions)
   }
 
 
