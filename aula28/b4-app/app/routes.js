@@ -9,13 +9,16 @@ const noView = async  function () {
 }
 
 const scripts = {
-  alert: require('./scripts/alert')
+  alert: require('./scripts/alert'),
+  search: require('./scripts/search')
 } 
 //tasksSearchScript = require('./tasksSearch')
 
 
 const compiledTemplates = {
   welcome: syncToAsync(Handlebars.compile(require('./templates/welcome.hbs').default)),
+  search: syncToAsync(Handlebars.compile(require('./templates/search.hbs').default)),
+  searchResults: syncToAsync(Handlebars.compile(require('./templates/searchResults.hbs').default)),
   alert: syncToAsync(Handlebars.compile(require('./templates/alert.hbs').default)),
 }
 
@@ -30,9 +33,9 @@ module.exports = {
     view: compiledTemplates.welcome,
     script: () => scripts.alert(compiledTemplates.alert)
   },
-  booksSearch: {
-    view: compiledTemplates.tasksSearch,
-    script: () => tasksSearchScript(compiledTemplates.tasksSearchResults)
+  search: {
+    view: compiledTemplates.search,
+    script: () => scripts.search(compiledTemplates.searchResults)
   },
   booksBundles: {
     view: noView,
@@ -40,9 +43,14 @@ module.exports = {
   },
   book: {
     view: async function() { 
-      return `no view for task ${arguments[0]} details `
+      return `no view for book ${arguments[0]} details `
       console.log(`task called with ${arguments[0]}`)
     },
     script: nop
+  },
+  error:  {
+    view: async (err) => await compiledTemplates.alert({title: 'An error ocurred', text: err, type: 'danger'}),
+    script: nop
   }
+
 }

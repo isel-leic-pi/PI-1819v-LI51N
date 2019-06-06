@@ -20,11 +20,7 @@ module.exports = (router, searchService) => {
 
 
   function search(req, rsp) {
-    searchService.search(req.params.field, req.params.query).then(processSearchResponse)
-
-    function processSearchResponse(data) {
-      rsp.status(200).json(data)
-    }
+    rsp.replyTo(searchService.search(req.params.field, req.params.query), 200)
   }
 
   function suggest(req, rsp) {

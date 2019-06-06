@@ -1,0 +1,10 @@
+{{#each this}}
+<div>
+<a href="#book/{{id}}">{{title}}</a> - 
+<span class="authors">
+  {{#each authors}}
+    {{this}} -
+  {{/each}}
+</span>
+</div>
+{{/each}}

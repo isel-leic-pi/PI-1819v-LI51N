@@ -12,6 +12,7 @@ const routes = require('./app/routes')
 
 (function () {  
   let mainContent = document.querySelector('.b4-main')
+  let alerts = document.querySelector('.b4-alerts')
   window.addEventListener('hashchange', showView);
   showView();
 
@@ -21,8 +22,13 @@ const routes = require('./app/routes')
 
     let viewTemplate = routes[view]
     if(viewTemplate) {
-      mainContent.innerHTML = await viewTemplate.view.apply(null, params)
-      viewTemplate.script()
+      try {
+        mainContent.innerHTML = await viewTemplate.view.apply(null, params)
+        await viewTemplate.script()
+      } catch(err) {
+        alerts.innerHTML = await routes.error.view(err)
+        await routes.error.script()
+      }
     } else {
       window.location.hash = '#welcome'
     }
