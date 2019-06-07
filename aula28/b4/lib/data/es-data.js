@@ -9,6 +9,7 @@ module.exports = function (es) {
     search: search,
     suggest: suggest,
     getBook: getBook,
+    getBundles: getBundles,
     createBundle: createBundle,
     getBundle: getBundle,
     updateBundle: updateBundle,
@@ -51,6 +52,11 @@ module.exports = function (es) {
 
   function getBook(bookId) {
     return makeRequest(new Options(URLS.bookUrl(bookId)))
+  }
+
+  function getBundles(size) {
+    return makeRequest(new Options(URLS.bundlesSearchUrl(size)))
+      .then(bundles => bundles.hits.hits)
   }
 
   function createBundle(bundleName) {
@@ -97,6 +103,7 @@ module.exports = function (es) {
     this.searchUrl = () => SEARCH_URL;
     this.bundlesUrl = () => BUNDLES_URL;
     this.bundleUrl = (id) => `${BUNDLES_URL}/${id}`;
+    this.bundlesSearchUrl = (size) => `${BUNDLES_URL}/_search` + (size ? `?size=${size}` : '');
     this.bookUrl = (id) => `${BOOKS_BASE_URL}${id}`;
 
   }

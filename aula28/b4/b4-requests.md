@@ -15,6 +15,13 @@
 
 ### Bundle API
 
+- Gets all bundles
+  - URI: `/api/bundle/`
+  - Method: `GET`
+  - QueryString:
+    - size: the maximum of results (bundles) to return
+  - Example `curl -v localhost:60702/api/bundle`
+
 - Create a bundle
   - URI: `/api/bundle/`
   - Method: `POST`
@@ -35,7 +42,6 @@
   - URI: `/api/bundle/:id`
   - Method: `DELETE`
   - Example `curl -v -X DELETE localhost:60702/api/bundle/dCXyGmsBkZNx_Ic3LkAY`
-
 
 - Update a bundle
   - URI: `/api/bundle/:id`

@@ -5,6 +5,12 @@
 
 module.exports = (router, bundlesService) => {
   /**
+   * Gets `size` bundles. If `size` is not provided, all bundles are returned
+   * Example: GET /api/bundle?size=10
+   */
+  router.get('/', getBundles)
+
+  /**
    * Create a new bundle with the specified name.
    * Example: POST /api/bundle/
    *          body: { "name": "<name>" }
@@ -45,6 +51,11 @@ module.exports = (router, bundlesService) => {
 
   return router;
 
+
+  function getBundles(req, res) {  
+    bundlesService.getBundles(req.query.size)
+      .then(rspData => res.json(rspData))
+  }
 
   function createBundle(req, res) {
     bundlesService.createBundle(req.body.name)

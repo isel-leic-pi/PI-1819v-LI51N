@@ -1,12 +1,17 @@
 
 module.exports = function (esData) {
   return {
+    getBundles: getBundles,
     createBundle: createBundle,
     getBundle: getBundle,
     updateBundle: updateBundle,
     deleteBundle: deleteBundle,
     addBookToBundle: addBookToBundle,
     deleteBookFromBundle: deleteBookFromBundle
+  }
+
+  function getBundles(size) {
+    return esData.getBundles(size)
   }
 
   function createBundle(bundleName) {
